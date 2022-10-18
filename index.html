@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Friendship</title>
+  <link rel="icon" type="image/png" sizes="64x64" href="iconM.png">
+  
+  <style>
+    h1{
+        font-family: Verdana;
+        font-size: x-large;
+    }
+    body {
+      margin: 1;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgb(151, 111, 170) ;
+    }
+    .container{
+        text-align: center;
+        position:absolute; 
+        top:55%;
+        left:30%;
+        transform: translate(-50%, -50%);
+    }
+    #evil-button {
+      position: absolute;
+      white-space: nowrap;      
+     padding: 50px  ;
+     border-radius: 20%;
+     width: 25%;
+     height: 25%;
+     font-family: Verdana;
+     font-size: xxx-large;
+     background-color: rgb(233, 0, 0);
+    
+      
+    }
+    .button1{
+        position: relative;
+        top:30%;
+        bottom:50%;
+        right:50%;
+        left:50%;
+        padding: 50px  ;
+        border-radius: 20%;
+        width: 25%;
+        height: 25%;
+        font-family: Verdana;
+        font-size: xxx-large;
+        text-align: center;
+        background-color: rgb(7, 150, 7);
+        border-color: rgb(54, 48, 48);
+    }
+    .button1 span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+    }
+
+    .button1 span:after {
+    content:  "🤩" "😼" ;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+    }
+
+    .button1:hover span {
+    padding-right: 155px;
+    }
+
+    .button1:hover span:after {
+    opacity: 1;
+    right: 0;
+    
+    }   
+    img{
+        position: absolute;
+        top: 10%;
+        bottom: 50%;
+        right: 40%;
+        left: 27%;
+    }
+    .button2{
+        position: relative;
+        top:60%;
+        bottom:50%;
+        right:50%;
+        left:10%;
+        padding: 50px  ;
+        border-radius: 20%;
+        width: 25%;
+        height: 25%;
+        font-family: Verdana;
+        font-size: xxx-large;
+        text-align: center;
+        background-color: rgb(240, 180, 89);
+        border-color: rgb(54, 48, 48);
+    }
+    p{
+      font-family: Verdana;
+      font-size: 50px;
+      text-align: center;
+      font-style: italic;
+      font:100px, white;
+    }
+
+
+    
+
+
+
+  </style>
+</head>
+<body>
+  <h1 style=" text-align: center; color:white;" id="menssagem">Kamilly tu aceita ser minha amiga denovo ?</h1>
+  <button  class = "container" id="evil-button" style="color:white;" >Não :(</button>
+  <button id="b1" class="button1" onclick="picture()" style="color:white"><span>Sim</span></button>
+  <button id="b2" class = "button2" onclick="menssage2()" style="color:black">Talvez 🤨</button>
+  <p id="menssagem2" style = "color:white;"></p>
+  <img id="foto" src="foto" class="img" style="opacity: 0;">
+</body>
+<script>
+    const evilButton = document.getElementById('evil-button')
+    const OFFSET = 100
+
+evilButton.addEventListener('click', () => {
+  alert('Nice Try')
+  window.close()
+})
+
+document.addEventListener('mousemove', (e) => {
+  const x = e.pageX
+  const y = e.pageY
+  const buttonBox = evilButton.getBoundingClientRect()
+  const horizontalDistanceFrom = distanceFromCenter(buttonBox.x, x, buttonBox.width)
+  const verticalDistanceFrom = distanceFromCenter(buttonBox.y, y, buttonBox.height)
+  const horizontalOffset = buttonBox.width / 2 + OFFSET
+  const verticalOffset = buttonBox.height / 2 + OFFSET
+  if (Math.abs(horizontalDistanceFrom) <= horizontalOffset && Math.abs(verticalDistanceFrom) <= verticalOffset) {
+    setButtonPosition(
+      buttonBox.x + horizontalOffset / horizontalDistanceFrom * 10,
+      buttonBox.y + verticalOffset / verticalDistanceFrom * 10
+    )
+    document.getElementById("evil-button").classList.remove("container")
+  }
+})
+
+function setButtonPosition(left, top) {
+  const windowBox = document.body.getBoundingClientRect()
+  const buttonBox = evilButton.getBoundingClientRect()
+
+  if(distanceFromCenter(left, windowBox.left, buttonBox.width) < 0) {
+    left = windowBox.right - buttonBox.width - OFFSET
+  }
+  if(distanceFromCenter(left, windowBox.right, buttonBox.width) > 0) {
+    left = windowBox.left + OFFSET
+  }
+  if(distanceFromCenter(top, windowBox.top, buttonBox.height) < 0) {
+    top = windowBox.bottom - buttonBox.height - OFFSET
+  }
+  if(distanceFromCenter(top, windowBox.bottom, buttonBox.height) > 0) {
+    top = windowBox.top + OFFSET
+  }
+
+  evilButton.style.left = `${left}px`
+  evilButton.style.top = `${top}px`
+}
+
+function distanceFromCenter(boxPosition, mousePosition, boxSize) {
+  return boxPosition - mousePosition + boxSize / 2
+}
+function picture(){ 
+    var pic = "cutecat_right.jpeg"
+    document.getElementById('foto').style.opacity=1;
+    document.getElementById('foto').src = pic.replace();
+    if(document.getElementById("b1").style.display == "none"){
+        document.getElementById("b1").style.display = "block";
+    }
+    else{
+        document.getElementById("b1").style.display = "none";
+        document.getElementById("evil-button").style.display = "none";
+        document.getElementById("menssagem").style.display="none";
+        document.getElementById("b2").style.display="none"; 
+        document.getElementById("menssagem2").style.display="none";
+    }
+    }
+function menssage2(){
+  document.getElementById("menssagem2").innerHTML = "Para de enrolar guria se decide logo! 😠"
+  document.getElementById("b2").style.display="none"; 
+  document.getElementById("b1").style.position="absolute";
+  document.getElementById("b1").style.textAlign="center"; 
+  //document.getElementById("b1").style.top="60%"; 
+  //document.getElementById("b1").style.bottom="50%"; 
+  //document.getElementById("b1").style.left="30%"; 
+  //document.getElementById("b1").style.right="50%"; 
+}
+  </script>
+</html>
